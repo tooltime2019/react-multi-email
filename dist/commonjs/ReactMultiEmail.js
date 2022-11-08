@@ -39,7 +39,6 @@ var ReactMultiEmail = /** @class */ (function (_super) {
             var validateEmail = _this.props.validateEmail;
             var validEmails = [];
             var inputValue = '';
-            var re = /[ ,;]/g;
             var isEmail = validateEmail || isEmail_1.default;
             var addEmails = function (email) {
                 var emails = _this.state.emails;
@@ -52,39 +51,16 @@ var ReactMultiEmail = /** @class */ (function (_super) {
                 return true;
             };
             if (value !== '') {
-                if (re.test(value)) {
-                    var splitData = value.split(re).filter(function (n) {
-                        return n !== '' && n !== undefined && n !== null;
-                    });
-                    var setArr = new Set(splitData);
-                    var arr = Array.from(setArr);
-                    do {
-                        if (isEmail('' + arr[0])) {
-                            addEmails('' + arr.shift());
-                        }
-                        else {
-                            if (arr.length === 1) {
-                                /// 마지막 아이템이면 inputValue로 남겨두기
-                                inputValue = '' + arr.shift();
-                            }
-                            else {
-                                arr.shift();
-                            }
-                        }
-                    } while (arr.length);
-                }
-                else {
-                    if (isEnter) {
-                        if (isEmail(value)) {
-                            addEmails(value);
-                        }
-                        else {
-                            inputValue = value;
-                        }
+                if (isEnter) {
+                    if (isEmail(value)) {
+                        addEmails(value);
                     }
                     else {
                         inputValue = value;
                     }
+                }
+                else {
+                    inputValue = value;
                 }
             }
             _this.setState({
@@ -115,8 +91,12 @@ var ReactMultiEmail = /** @class */ (function (_super) {
         _this.handleOnKeydown = function (e) {
             switch (e.which) {
                 case 13:
-                case 9:
                     e.preventDefault();
+                    break;
+                case 9:
+                    if (e.currentTarget.value) {
+                        e.preventDefault();
+                    }
                     break;
                 case 8:
                     if (!e.currentTarget.value) {

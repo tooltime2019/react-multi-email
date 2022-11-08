@@ -12,7 +12,6 @@ class ReactMultiEmail extends React.Component {
             const { validateEmail } = this.props;
             let validEmails = [];
             let inputValue = '';
-            const re = /[ ,;]/g;
             const isEmail = validateEmail || isEmailFn;
             const addEmails = (email) => {
                 const emails = this.state.emails;
@@ -25,39 +24,16 @@ class ReactMultiEmail extends React.Component {
                 return true;
             };
             if (value !== '') {
-                if (re.test(value)) {
-                    let splitData = value.split(re).filter(n => {
-                        return n !== '' && n !== undefined && n !== null;
-                    });
-                    const setArr = new Set(splitData);
-                    let arr = Array.from(setArr);
-                    do {
-                        if (isEmail('' + arr[0])) {
-                            addEmails('' + arr.shift());
-                        }
-                        else {
-                            if (arr.length === 1) {
-                                /// 마지막 아이템이면 inputValue로 남겨두기
-                                inputValue = '' + arr.shift();
-                            }
-                            else {
-                                arr.shift();
-                            }
-                        }
-                    } while (arr.length);
-                }
-                else {
-                    if (isEnter) {
-                        if (isEmail(value)) {
-                            addEmails(value);
-                        }
-                        else {
-                            inputValue = value;
-                        }
+                if (isEnter) {
+                    if (isEmail(value)) {
+                        addEmails(value);
                     }
                     else {
                         inputValue = value;
                     }
+                }
+                else {
+                    inputValue = value;
                 }
             }
             this.setState({
@@ -75,7 +51,7 @@ class ReactMultiEmail extends React.Component {
             if (isDisabled) {
                 return;
             }
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 return {
                     emails: [
                         ...prevState.emails.slice(0, index),
@@ -91,8 +67,12 @@ class ReactMultiEmail extends React.Component {
         this.handleOnKeydown = (e) => {
             switch (e.which) {
                 case 13:
-                case 9:
                     e.preventDefault();
+                    break;
+                case 9:
+                    if (e.currentTarget.value) {
+                        e.preventDefault();
+                    }
                     break;
                 case 8:
                     if (!e.currentTarget.value) {
@@ -134,7 +114,7 @@ class ReactMultiEmail extends React.Component {
     }
     render() {
         const { focused, emails, inputValue } = this.state;
-        const { style, getLabel, className = '', noClass, placeholder } = this.props;
+        const { style, getLabel, className = '', noClass, placeholder, } = this.props;
         // removeEmail
         return (React.createElement("div", { className: `${className} ${noClass ? '' : 'react-multi-email'} ${focused ? 'focused' : ''} ${inputValue === '' && emails.length === 0 ? 'empty' : ''}`, style: style, onClick: () => {
                 if (this.emailInputRef.current) {
