@@ -60,7 +60,6 @@ class ReactMultiEmail extends React.Component<
     const { validateEmail } = this.props;
     let validEmails: string[] = [];
     let inputValue: string = '';
-    const re = /[ ,;]/g;
     const isEmail = validateEmail || isEmailFn;
 
     const addEmails = (email: string) => {
@@ -75,38 +74,15 @@ class ReactMultiEmail extends React.Component<
     };
 
     if (value !== '') {
-      if (re.test(value)) {
-        let splitData = value.split(re).filter(n => {
-          return n !== '' && n !== undefined && n !== null;
-        });
-        
-        const setArr = new Set(splitData);
-        let arr = Array.from(setArr);
-
-        do {
-          if (isEmail('' + arr[0])) {
-            addEmails('' + arr.shift());
-          } else {
-            if (arr.length === 1) {
-              /// 마지막 아이템이면 inputValue로 남겨두기
-              inputValue = '' + arr.shift();
-            } else {
-              arr.shift();
-            }
-          }
-        } while (arr.length);
-      } else {
-        if (isEnter) {
-          if (isEmail(value)) {
-            addEmails(value);
-          } else {
-            inputValue = value;
-          }
+      if (isEnter) {
+        if (isEmail(value)) {
+          addEmails(value);
         } else {
           inputValue = value;
         }
+      } else {
+        inputValue = value;
       }
-    }
 
     this.setState({
       emails: [...this.state.emails, ...validEmails],
@@ -123,11 +99,11 @@ class ReactMultiEmail extends React.Component<
   };
 
   removeEmail = (index: number, isDisabled: boolean) => {
-    if(isDisabled) {
-        return;
+    if (isDisabled) {
+      return;
     }
     this.setState(
-      prevState => {
+      (prevState) => {
         return {
           emails: [
             ...prevState.emails.slice(0, index),
@@ -146,8 +122,12 @@ class ReactMultiEmail extends React.Component<
   handleOnKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     switch (e.which) {
       case 13:
-      case 9:
         e.preventDefault();
+        break;
+      case 9:
+        if (e.currentTarget.value) {
+          e.preventDefault();
+        }
         break;
       case 8:
         if (!e.currentTarget.value) {
@@ -183,7 +163,13 @@ class ReactMultiEmail extends React.Component<
 
   render() {
     const { focused, emails, inputValue } = this.state;
-    const { style, getLabel, className = '', noClass, placeholder } = this.props;
+    const {
+      style,
+      getLabel,
+      className = '',
+      noClass,
+      placeholder,
+    } = this.props;
 
     // removeEmail
 
