@@ -83,6 +83,7 @@ class ReactMultiEmail extends React.Component<
       } else {
         inputValue = value;
       }
+    }
 
     this.setState({
       emails: [...this.state.emails, ...validEmails],
