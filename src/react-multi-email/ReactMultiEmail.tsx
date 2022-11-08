@@ -10,7 +10,7 @@ export interface IReactMultiEmailProps {
   getLabel: (
     email: string,
     index: number,
-    removeEmail: (index: number) => void,
+    removeEmail: (index: number, isDisabled: boolean) => void,
   ) => void;
   className?: string;
   placeholder?: string | React.ReactNode;
@@ -81,7 +81,7 @@ class ReactMultiEmail extends React.Component<
         });
         
         const setArr = new Set(splitData);
-        let arr = [...setArr];
+        let arr = Array.from(setArr);
 
         do {
           if (isEmail('' + arr[0])) {

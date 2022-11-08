@@ -5,7 +5,7 @@ export interface IReactMultiEmailProps {
     noClass?: boolean;
     validateEmail?: (email: string) => boolean;
     style?: object;
-    getLabel: (email: string, index: number, removeEmail: (index: number) => void) => void;
+    getLabel: (email: string, index: number, removeEmail: (index: number, isDisabled: boolean) => void) => void;
     className?: string;
     placeholder?: string | React.ReactNode;
 }
@@ -31,7 +31,7 @@ declare class ReactMultiEmail extends React.Component<IReactMultiEmailProps, IRe
     constructor(props: IReactMultiEmailProps);
     findEmailAddress: (value: string, isEnter?: boolean) => void;
     onChangeInputValue: (value: string) => void;
-    removeEmail: (index: number) => void;
+    removeEmail: (index: number, isDisabled: boolean) => void;
     handleOnKeydown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     handleOnKeyup: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     handleOnChange: (e: React.SyntheticEvent<HTMLInputElement>) => void;

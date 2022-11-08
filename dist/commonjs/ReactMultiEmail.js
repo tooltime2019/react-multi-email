@@ -1,14 +1,28 @@
 "use strict";
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var isEmail_1 = require("./isEmail");
@@ -39,9 +53,11 @@ var ReactMultiEmail = /** @class */ (function (_super) {
             };
             if (value !== '') {
                 if (re.test(value)) {
-                    var arr = value.split(re).filter(function (n) {
+                    var splitData = value.split(re).filter(function (n) {
                         return n !== '' && n !== undefined && n !== null;
                     });
+                    var setArr = new Set(splitData);
+                    var arr = Array.from(setArr);
                     do {
                         if (isEmail('' + arr[0])) {
                             addEmails('' + arr.shift());
@@ -72,20 +88,23 @@ var ReactMultiEmail = /** @class */ (function (_super) {
                 }
             }
             _this.setState({
-                emails: _this.state.emails.concat(validEmails),
+                emails: __spreadArray(__spreadArray([], _this.state.emails, true), validEmails, true),
                 inputValue: inputValue,
             });
             if (validEmails.length && _this.props.onChange) {
-                _this.props.onChange(_this.state.emails.concat(validEmails));
+                _this.props.onChange(__spreadArray(__spreadArray([], _this.state.emails, true), validEmails, true));
             }
         };
         _this.onChangeInputValue = function (value) {
             _this.findEmailAddress(value);
         };
-        _this.removeEmail = function (index) {
+        _this.removeEmail = function (index, isDisabled) {
+            if (isDisabled) {
+                return;
+            }
             _this.setState(function (prevState) {
                 return {
-                    emails: prevState.emails.slice(0, index).concat(prevState.emails.slice(index + 1)),
+                    emails: __spreadArray(__spreadArray([], prevState.emails.slice(0, index), true), prevState.emails.slice(index + 1), true),
                 };
             }, function () {
                 if (_this.props.onChange) {
@@ -101,7 +120,7 @@ var ReactMultiEmail = /** @class */ (function (_super) {
                     break;
                 case 8:
                     if (!e.currentTarget.value) {
-                        _this.removeEmail(_this.state.emails.length - 1);
+                        _this.removeEmail(_this.state.emails.length - 1, false);
                     }
                     break;
                 default:
@@ -147,7 +166,7 @@ var ReactMultiEmail = /** @class */ (function (_super) {
         var _a = this.state, focused = _a.focused, emails = _a.emails, inputValue = _a.inputValue;
         var _b = this.props, style = _b.style, getLabel = _b.getLabel, _c = _b.className, className = _c === void 0 ? '' : _c, noClass = _b.noClass, placeholder = _b.placeholder;
         // removeEmail
-        return (React.createElement("div", { className: className + " " + (noClass ? '' : 'react-multi-email') + " " + (focused ? 'focused' : '') + " " + (inputValue === '' && emails.length === 0 ? 'empty' : ''), style: style, onClick: function () {
+        return (React.createElement("div", { className: "".concat(className, " ").concat(noClass ? '' : 'react-multi-email', " ").concat(focused ? 'focused' : '', " ").concat(inputValue === '' && emails.length === 0 ? 'empty' : ''), style: style, onClick: function () {
                 if (_this.emailInputRef.current) {
                     _this.emailInputRef.current.focus();
                 }
