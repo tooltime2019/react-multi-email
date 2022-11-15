@@ -1,10 +1,10 @@
 {
-  "name": "react-multi-email",
-  "version": "0.5.3",
+  "name": "@tooltime2019/react-multi-email",
+  "version": "0.5.4",
   "description": "React multi email input",
   "jsnext:main": "es6/index.js",
   "main": "commonjs/index.js",
-  "repository": "https://github.com/jsdevkr/react-multi-email",
+  "repository": "https://github.com/tooltime2019/react-multi-email",
   "author": "tom@axisj.com",
   "license": "MIT",
   "peerDependencies": {
