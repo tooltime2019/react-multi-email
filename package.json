@@ -1,6 +1,7 @@
 {
-  "name": "react-multi-email",
-  "version": "0.5.3",
+  "name": "@tooltime2019/react-multi-email",
+  "repository": "https://github.com/tooltime2019/react-multi-email",
+  "version": "0.5.4",
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
@@ -9,7 +10,7 @@
   "devDependencies": {
     "@types/history": "^4.7.0",
     "@types/jest": "^22.2.2",
-    "@types/node": "^9.6.18",
+    "@types/node": "^16.18.3",
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "@types/react-router": "^4.0.25",
@@ -26,7 +27,7 @@
     "jsonfile": "^5.0.0",
     "less": "^3.5.3",
     "less-loader": "^4.1.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^8.0.0",
     "raw-loader": "^0.5.1",
     "react": "^16.4.0",
     "react-app-rewire-css-modules": "github:codebandits/react-app-rewire-css-modules",
@@ -46,7 +47,7 @@
     "styled-components": "^3.4.5",
     "styled-normalize": "^4.0.0",
     "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.9.2",
+    "typescript": "^4.8.4",
     "typescript-styled-plugin": "^0.6.0"
   },
   "scripts": {
@@ -62,7 +63,7 @@
   },
   "betterScripts": {
     "build:common": "cp ./src/react-multi-email/style.css ./dist/style.css && cp ./README.md ./dist/README.md",
-    "build:es5": "rm -rf ./dist/commonjs && tsc src/react-multi-email/*.tsx --declaration --outDir dist/commonjs --jsx react --module commonjs --target es5 --moduleResolution node",
+    "build:es5": "rm -rf ./dist/commonjs && tsc src/react-multi-email/*.tsx --declaration --outDir dist/commonjs --jsx react --module commonjs --target es5 --moduleResolution node --downlevelIteration",
     "build:es6": "rm -rf ./dist/es6 && tsc src/react-multi-email/*.tsx --declaration --outDir dist/es6 --jsx react --module es6 --target es6 --moduleResolution node"
   }
 }
