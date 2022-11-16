@@ -131,6 +131,7 @@ var ReactMultiEmail = /** @class */ (function (_super) {
                 case 9:
                     if (e.currentTarget.value) {
                         e.preventDefault();
+                        e.stopPropagation();
                     }
                     break;
                 case 8:

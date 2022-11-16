@@ -147,6 +147,7 @@ class ReactMultiEmail extends React.Component<
       case 9:
         if (e.currentTarget.value) {
           e.preventDefault();
+          e.stopPropagation();
         }
         break;
       case 8:
