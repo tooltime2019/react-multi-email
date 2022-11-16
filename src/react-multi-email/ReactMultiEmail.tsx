@@ -2,6 +2,7 @@ import * as React from 'react';
 import isEmailFn from './isEmail';
 
 export interface IReactMultiEmailProps {
+  inputId?: string;
   emails?: string[];
   onChange?: (emails: string[]) => void;
   noClass?: boolean;
@@ -180,7 +181,7 @@ class ReactMultiEmail extends React.Component<
 
   render() {
     const { focused, emails, inputValue } = this.state;
-    const { style, getLabel, className = '', noClass, placeholder } = this.props;
+    const { inputId, style, getLabel, className = '', noClass, placeholder } = this.props;
 
     // removeEmail
 
@@ -201,6 +202,7 @@ class ReactMultiEmail extends React.Component<
           getLabel(email, index, this.removeEmail),
         )}
         <input
+          id={inputId}
           ref={this.emailInputRef}
           type="text"
           value={inputValue}
