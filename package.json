@@ -58,8 +58,8 @@
     "test": "react-app-rewired test --scripts-version react-scripts-ts --env=jsdom",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "prepublish": "npm run build",
-    "publish:patch": "cd dist && npm version patch && cd .. && node ./scripts/syncVersion.js && npm run docs",
-    "publish:minor": "cd dist && npm version minor && cd .. && node ./scripts/syncVersion.js && npm run docs"
+    "publish:patch": "npm run build && cd dist && npm version patch && cd .. && node ./scripts/syncVersion.js && cd dist && npm publish",
+    "publish:minor": "npm run build && cd dist && npm version minor && cd .. && node ./scripts/syncVersion.js && cd dist && npm publish"
   },
   "betterScripts": {
     "build:common": "cp ./src/react-multi-email/style.css ./dist/style.css && cp ./README.md ./dist/README.md",

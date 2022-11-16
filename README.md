@@ -1,31 +1,29 @@
-[![npm version](https://badge.fury.io/js/react-multi-email.svg)](https://badge.fury.io/js/react-multi-email)
-[![](https://img.shields.io/npm/dm/react-multi-email.svg)](https://www.npmjs.com/package/react-multi-email)
-
 # react-multi-email
 
 A simple react component to format multiple email as the user types.
 
-- Simple code
-- No dependency
-- Small size
-- Simple customization
+## Development
 
-[See Demo](https://codesandbox.io/s/jpvjk8m5o9)
+Install with `npm install`
 
-<img src="https://cdn.rawgit.com/axui/react-multi-email/c3098f94/react-multi-email.gif" />
+Run locally with `nmp start`, and make changes in the `src` directory. Review your changes on `http://localhost:3000`
+
+## Releasing a new version
+
+Make your changes and run `npm run publish:patch` or `npm run publish:minor` - this will automatically build, increment the version and publish the dist folder.
 
 ## Installation
 
 ```shell-script
-npm install react-multi-email -S
+npm install @tooltime2019/react-multi-email -S
 ```
 
 ## Usage
 
 ```typescript jsx
 import * as React from 'react';
-import { ReactMultiEmail, isEmail } from 'react-multi-email';
-import 'react-multi-email/style.css';
+import { ReactMultiEmail, isEmail } from '@tooltime2019/react-multi-email';
+import '@tooltime2019/react-multi-email/style.css';
 
 interface IProps {}
 interface IState {
@@ -80,5 +78,3 @@ export default Basic;
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
-
-> If you don't mind, don't forget to press "star" before leaving.
