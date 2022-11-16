@@ -145,7 +145,9 @@ class ReactMultiEmail extends React.Component<
     switch (e.which) {
       case 13:
       case 9:
-        e.preventDefault();
+        if (e.currentTarget.value) {
+          e.preventDefault();
+        }
         break;
       case 8:
         if (!e.currentTarget.value) {
