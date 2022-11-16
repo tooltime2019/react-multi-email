@@ -17,17 +17,13 @@ class CustomizeStyle extends React.Component<IProps, IState> {
       <>
         <h3>Email</h3>
         <ReactMultiEmail
-          placeholder={
-            <>
-              <b>I</b> am <u style={{ color: '#a0f2ff' }}>placeholder</u> !
-            </>
-          }
+          placeholder={'I am a placeholder'}
           style={{ minHeight: '100px' }}
           emails={emails}
           onChange={(_emails: string[]) => {
             this.setState({ emails: _emails });
           }}
-          validateEmail={email => {
+          validateEmail={(email) => {
             return isEmail(email);
           }}
           getLabel={(
@@ -37,9 +33,7 @@ class CustomizeStyle extends React.Component<IProps, IState> {
           ) => {
             return (
               <div data-tag key={index}>
-                <div data-tag-item>
-                  {email}
-                </div>
+                <div data-tag-item>{email}</div>
                 <span data-tag-handle onClick={() => removeEmail(index)}>
                   ×
                 </span>
