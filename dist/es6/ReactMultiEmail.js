@@ -89,7 +89,9 @@ class ReactMultiEmail extends React.Component {
             switch (e.which) {
                 case 13:
                 case 9:
-                    e.preventDefault();
+                    if (e.currentTarget.value) {
+                        e.preventDefault();
+                    }
                     break;
                 case 8:
                     if (!e.currentTarget.value) {
@@ -131,7 +133,7 @@ class ReactMultiEmail extends React.Component {
     }
     render() {
         const { focused, emails, inputValue } = this.state;
-        const { style, getLabel, className = '', noClass, placeholder } = this.props;
+        const { inputId, style, getLabel, className = '', noClass, placeholder } = this.props;
         // removeEmail
         return (React.createElement("div", { className: `${className} ${noClass ? '' : 'react-multi-email'} ${focused ? 'focused' : ''} ${inputValue === '' && emails.length === 0 ? 'empty' : ''}`, style: style, onClick: () => {
                 if (this.emailInputRef.current) {
@@ -140,7 +142,7 @@ class ReactMultiEmail extends React.Component {
             } },
             placeholder ? React.createElement("span", { "data-placeholder": true }, placeholder) : null,
             emails.map((email, index) => getLabel(email, index, this.removeEmail)),
-            React.createElement("input", { ref: this.emailInputRef, type: "text", value: inputValue, onFocus: this.handleOnFocus, onBlur: this.handleOnBlur, onChange: this.handleOnChange, onKeyDown: this.handleOnKeydown, onKeyUp: this.handleOnKeyup })));
+            React.createElement("input", { id: inputId, ref: this.emailInputRef, type: "text", value: inputValue, onFocus: this.handleOnFocus, onBlur: this.handleOnBlur, onChange: this.handleOnChange, onKeyDown: this.handleOnKeydown, onKeyUp: this.handleOnKeyup })));
     }
 }
 export default ReactMultiEmail;

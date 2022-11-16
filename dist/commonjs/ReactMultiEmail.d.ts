@@ -1,5 +1,6 @@
 import * as React from 'react';
 export interface IReactMultiEmailProps {
+    inputId?: string;
     emails?: string[];
     onChange?: (emails: string[]) => void;
     noClass?: boolean;

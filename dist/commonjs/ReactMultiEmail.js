@@ -129,7 +129,9 @@ var ReactMultiEmail = /** @class */ (function (_super) {
             switch (e.which) {
                 case 13:
                 case 9:
-                    e.preventDefault();
+                    if (e.currentTarget.value) {
+                        e.preventDefault();
+                    }
                     break;
                 case 8:
                     if (!e.currentTarget.value) {
@@ -177,7 +179,7 @@ var ReactMultiEmail = /** @class */ (function (_super) {
     ReactMultiEmail.prototype.render = function () {
         var _this = this;
         var _a = this.state, focused = _a.focused, emails = _a.emails, inputValue = _a.inputValue;
-        var _b = this.props, style = _b.style, getLabel = _b.getLabel, _c = _b.className, className = _c === void 0 ? '' : _c, noClass = _b.noClass, placeholder = _b.placeholder;
+        var _b = this.props, inputId = _b.inputId, style = _b.style, getLabel = _b.getLabel, _c = _b.className, className = _c === void 0 ? '' : _c, noClass = _b.noClass, placeholder = _b.placeholder;
         // removeEmail
         return (React.createElement("div", { className: "".concat(className, " ").concat(noClass ? '' : 'react-multi-email', " ").concat(focused ? 'focused' : '', " ").concat(inputValue === '' && emails.length === 0 ? 'empty' : ''), style: style, onClick: function () {
                 if (_this.emailInputRef.current) {
@@ -188,7 +190,7 @@ var ReactMultiEmail = /** @class */ (function (_super) {
             emails.map(function (email, index) {
                 return getLabel(email, index, _this.removeEmail);
             }),
-            React.createElement("input", { ref: this.emailInputRef, type: "text", value: inputValue, onFocus: this.handleOnFocus, onBlur: this.handleOnBlur, onChange: this.handleOnChange, onKeyDown: this.handleOnKeydown, onKeyUp: this.handleOnKeyup })));
+            React.createElement("input", { id: inputId, ref: this.emailInputRef, type: "text", value: inputValue, onFocus: this.handleOnFocus, onBlur: this.handleOnBlur, onChange: this.handleOnChange, onKeyDown: this.handleOnKeydown, onKeyUp: this.handleOnKeyup })));
     };
     return ReactMultiEmail;
 }(React.Component));
