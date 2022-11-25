@@ -4,6 +4,7 @@ export interface IReactMultiEmailProps {
     emails?: string[];
     onChange?: (emails: string[]) => void;
     noClass?: boolean;
+    emailInputRef?: React.RefObject<HTMLInputElement>;
     validateEmail?: (email: string) => boolean;
     style?: object;
     getLabel: (email: string, index: number, removeEmail: (index: number) => void) => void;

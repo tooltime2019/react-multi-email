@@ -2,6 +2,7 @@ import * as React from 'react';
 import isEmailFn from './isEmail';
 class ReactMultiEmail extends React.Component {
     constructor(props) {
+        var _a;
         super(props);
         this.state = {
             focused: false,
@@ -119,7 +120,7 @@ class ReactMultiEmail extends React.Component {
         this.handleOnFocus = () => this.setState({
             focused: true,
         });
-        this.emailInputRef = React.createRef();
+        this.emailInputRef = (_a = props.emailInputRef) !== null && _a !== void 0 ? _a : React.createRef();
     }
     static getDerivedStateFromProps(nextProps, prevState) {
         if (prevState.propsEmails !== nextProps.emails) {
