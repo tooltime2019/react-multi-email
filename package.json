@@ -1,7 +1,7 @@
 {
   "name": "@tooltime2019/react-multi-email",
   "repository": "https://github.com/tooltime2019/react-multi-email",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "peerDependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
