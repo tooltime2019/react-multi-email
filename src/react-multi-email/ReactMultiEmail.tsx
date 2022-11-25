@@ -15,7 +15,7 @@ export interface IReactMultiEmailProps {
     removeEmail: (index: number) => void,
   ) => void;
   className?: string;
-  placeholder?: string | React.ReactNode;
+  placeholder?: string;
 }
 
 export interface IReactMultiEmailState {
@@ -78,10 +78,10 @@ class ReactMultiEmail extends React.Component<
 
     if (value !== '') {
       if (re.test(value)) {
-        let splitData = value.split(re).filter(n => {
+        let splitData = value.split(re).filter((n) => {
           return n !== '' && n !== undefined && n !== null;
         });
-        
+
         const setArr = new Set(splitData);
         let arr = [...setArr];
 
@@ -126,7 +126,7 @@ class ReactMultiEmail extends React.Component<
 
   removeEmail = (index: number) => {
     this.setState(
-      prevState => {
+      (prevState) => {
         return {
           emails: [
             ...prevState.emails.slice(0, index),
@@ -185,9 +185,18 @@ class ReactMultiEmail extends React.Component<
 
   render() {
     const { focused, emails, inputValue } = this.state;
-    const { inputId, style, getLabel, className = '', noClass, placeholder } = this.props;
+    const {
+      inputId,
+      style,
+      getLabel,
+      className = '',
+      noClass,
+      placeholder,
+    } = this.props;
 
     // removeEmail
+
+    const showPlaceholder = placeholder && emails.length === 0;
 
     return (
       <div
@@ -201,7 +210,6 @@ class ReactMultiEmail extends React.Component<
           }
         }}
       >
-        {placeholder ? <span data-placeholder>{placeholder}</span> : null}
         {emails.map((email: string, index: number) =>
           getLabel(email, index, this.removeEmail),
         )}
@@ -215,6 +223,7 @@ class ReactMultiEmail extends React.Component<
           onChange={this.handleOnChange}
           onKeyDown={this.handleOnKeydown}
           onKeyUp={this.handleOnKeyup}
+          placeholder={showPlaceholder ? placeholder : ''}
         />
       </div>
     );
