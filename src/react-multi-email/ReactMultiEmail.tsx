@@ -6,6 +6,7 @@ export interface IReactMultiEmailProps {
   emails?: string[];
   onChange?: (emails: string[]) => void;
   noClass?: boolean;
+  emailInputRef?: React.RefObject<HTMLInputElement>;
   validateEmail?: (email: string) => boolean;
   style?: object;
   getLabel: (
@@ -54,7 +55,7 @@ class ReactMultiEmail extends React.Component<
   constructor(props: IReactMultiEmailProps) {
     super(props);
 
-    this.emailInputRef = React.createRef();
+    this.emailInputRef = props.emailInputRef ?? React.createRef();
   }
 
   findEmailAddress = (value: string, isEnter?: boolean) => {
